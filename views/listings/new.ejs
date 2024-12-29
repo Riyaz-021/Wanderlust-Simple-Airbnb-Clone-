@@ -1,0 +1,118 @@
+<% layout('/layouts/boilerplate') -%>
+<body>
+  <br /><br />
+  <div class="row">
+    <div class="col-8 offset-2">
+      <h2>Create New Listing</h2>
+      <form
+        action="/listings"
+        method="post"
+        novalidate
+        class="needs-validation"
+        enctype="multipart/form-data"
+      >
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input
+            type="text"
+            name="listing[title]"
+            placeholder="enter a catchy title"
+            class="form-control"
+            required
+          />
+          <div class="valid-feedback">Looks Good</div>
+          <div class="invalid-feedback">Please enter a title.</div>
+        </div>
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea
+            name="listing[description]"
+            cols="30"
+            rows="2"
+            placeholder="enter description"
+            class="form-control"
+            required
+          ></textarea>
+          <div class="valid-feedback">Looks Good</div>
+          <div class="invalid-feedback">Please enter description.</div>
+        </div>
+        <div class="mb-3">
+          <label for="category" class="form-label">Category</label>
+          <select
+            id="category"
+            name="listing[category]"
+            class="form-select"
+            required
+          >
+            <option value="">Select a category</option>
+            <option value="rooms">Rooms</option>
+            <option value="villa">Villa</option>
+            <option value="mountains">Mountains</option>
+            <option value="historic">Historic</option>
+            <option value="pools">Pools</option>
+            <option value="camping">Camping</option>
+            <option value="resort">Resort</option>
+            <option value="beach">Beach</option>
+            <option value="arctic">Arctic</option>
+            <option value="boats">Boats</option>
+          </select>
+          <div class="valid-feedback">Looks Good</div>
+          <div class="invalid-feedback">
+            Please select a category that suits your listing
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Image</label>
+          <input
+            type="file"
+            name="listing[image]"
+            class="form-control"
+            required
+          />
+          <div class="valid-feedback">Looks Good</div>
+          <div class="invalid-feedback">Please upload an image</div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-4">
+            <label for="price" class="form-labe">Price</label>
+            <input
+              name="listing[price]"
+              placeholder="4500"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Fair enough</div>
+            <div class="invalid-feedback">Please enter a price</div>
+          </div>
+          <div class="mb-3 col-md-8">
+            <label for="country" class="form-label">Country</label>
+            <input
+              type="text"
+              name="listing[country]"
+              placeholder="India"
+              class="form-control"
+              required
+            />
+            <div class="valid-feedback">Looks Good</div>
+            <div class="invalid-feedback">Please enter country</div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            name="listing[location]"
+            placeholder="Jaipur, Rajasthan"
+            class="form-control"
+            required
+          />
+          <div class="valid-feedback">Looks Good</div>
+          <div class="invalid-feedback">Please enter a valid location.</div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-dark mb-3 add-btn">Submit</button>
+      </form>
+      <br />
+    </div>
+  </div>
+</body>
