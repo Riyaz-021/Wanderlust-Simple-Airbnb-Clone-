@@ -1,24 +1,37 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
-const initData = require("./data.js");
 const Listing = require("../models/listing.js");
-const mongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
-//const dbUrl = process.env.ATLASDB_URL;
 
-main()
-  .then(() => {
-    console.log("Database connection successful");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const localMongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
+const atlasMongoUrl = process.env.ATLASDV_URL;
 
-async function main() {
-  await mongoose.connect(mongoUrl);
+async function transferData() {
+  try {
+    // Connect to local database
+    await mongoose.connect(localMongoUrl);
+    console.log("Connected to local database");
+
+    // Fetch data from local database
+    const listings = await Listing.find({});
+    console.log(`Fetched ${listings.length} listings from local database`);
+
+    // Disconnect from local database
+    await mongoose.disconnect();
+
+    // Connect to MongoDB Atlas
+    await mongoose.connect(atlasMongoUrl);
+    console.log("Connected to MongoDB Atlas");
+
+    // Clear and insert data into Atlas
+    await Listing.deleteMany({});
+    await Listing.insertMany(listings);
+    console.log("Data successfully transferred to MongoDB Atlas");
+
+    // Disconnect from MongoDB Atlas
+    await mongoose.disconnect();
+  } catch (err) {
+    console.error("Error during data transfer:", err);
+  }
 }
 
-const initDb = async () => {
-  await Listing.deleteMany({});
-  await Listing.insertMany(initData.data);
-};
-
-initDb();
+transferData();
