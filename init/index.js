@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Listing = require("../models/listing.js");
 
 const localMongoUrl = "mongodb://127.0.0.1:27017/wanderlust";
-const atlasMongoUrl = process.env.ATLASDV_URL;
+const atlasMongoUrl = process.env.ATLASDB_URL;
 
 async function transferData() {
   try {
